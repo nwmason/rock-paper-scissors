@@ -1,9 +1,9 @@
-// generates random computer choice
+//  generates random computer choice
 function getComputerChoice() {
     let choice = Math.random();
 
     if (choice <= 0.4) {
-        return 'scissors';       // let's be real, most people select scissors
+        return 'scissors';       //  let's be real, most people select scissors
     } else if (choice <= 0.7) {
         return 'rock';
     } else {
@@ -11,7 +11,7 @@ function getComputerChoice() {
     }
 }
 
-// collects player choice
+//  collects player choice
 function getPlayerChoice() {
     let choice = prompt('Rock, Paper, or Scissors?').toLowerCase().trim()
 
@@ -21,7 +21,7 @@ function getPlayerChoice() {
         return choice
     } else if (choice.includes('paper')) {
         return choice
-    } else {        // we all know that one kid who selected "rocket launcher" at the school playground. Automatic lose state.
+    } else {
         return choice
     }
 }
@@ -35,6 +35,7 @@ function playRound(playerChoice, computerChoice) {
     alert('You have selected ' + playerChoice + '!')
     alert('The computer picks ' + computerChoice + '!')
 
+     //  we all know that one kid who selected "rocket launcher" at the school playground. Automatic lose state.
     if (playerChoice != 'rock' && playerChoice != 'paper' && playerChoice != 'scissors') {
         alert('You have chosen an incorrect option. \nYou lose this round!')
         return ++computerScore, playerScore
