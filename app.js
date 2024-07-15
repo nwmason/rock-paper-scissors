@@ -13,17 +13,16 @@ function getComputerChoice() {
 
 // collects player choice
 function getPlayerChoice() {
-    let choice = prompt('Rock, Paper, or Scissors?')
+    let choice = prompt('Rock, Paper, or Scissors?').toLowerCase().trim()
 
-    if (choice.toLowerCase().includes('rock')) {
-        alert('You have chosen rock!')
+    if (choice.includes('rock')) {
         return choice
-    } else if (choice.toLowerCase().includes('scissors')) {
-        alert('You have chosen scissors!')
-    } else if (choice.toLowerCase().includes('paper')) {
-        alert('You have chosen rock!')
+    } else if (choice.includes('scissors')) {
+        return choice
+    } else if (choice.includes('paper')) {
+        return choice
     } else {        // we all know that one kid who selected "rocket launcher" at the school playground. Automatic lose state.
-        alert('You have chosen an incorrect option. You lose!') 
+        return choice
     }
 }
 
@@ -33,10 +32,15 @@ function playRound(playerChoice, computerChoice) {
     playerChoice = getPlayerChoice();
     computerChoice = getComputerChoice();
 
-    alert('The computer picks ' + computerChoice)
+    alert('You have selected ' + playerChoice + '!')
+    alert('The computer picks ' + computerChoice + '!')
 
-    if (playerChoice === computerChoice) {
+    if (playerChoice != 'rock' && playerChoice != 'paper' && playerChoice != 'scissors') {
+        alert('You have chosen an incorrect option. \nYou lose this round!')
+        return ++computerScore, playerScore
+    } else if (playerChoice === computerChoice) {
         alert('This round was a tie! No points awarded for either player.');
+        return
     } else if (playerChoice === 'rock' && computerChoice === 'scissors') {
         alert('You have won this round!');
         return ++playerScore, computerScore;
