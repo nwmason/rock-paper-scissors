@@ -71,7 +71,5 @@ function playGame() {
     }
 }
 
-//  --------------------   End Function Stuff   --------------------  //
 let computerScore = 0, playerScore = 0;
-
-playGame();
+//  --------------------   End Game Logic   --------------------  //

@@ -4,8 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- background video for hyper overstylization -->
+    <div>
+        <div class="overlay"></div>
+        <video autoplay muted loop id="bg-video">
+            <source src="img/bg.webm" type="video/webm">
+        </video>
+    </div>
+
     <script src="app.js"></script>
+
+    <!-- begin site content -->
+    <div class="header container">
+        <span>rock paper scissors</span>
+    </div>
+
+    <div class="content-main">
+        <div class="selector container" id="rock">
+
+        </div>
+        <div class="selector container" id="paper">
+            
+        </div>
+        <div class="selector container" id="scissors">
+            
+        </div>
+    </div>
+
 </body>
 </html>

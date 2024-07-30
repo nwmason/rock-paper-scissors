@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    padding: 0; 
+
+    font-family: "Major Mono Display", monospace;
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+    color: purple;
+}
+
+#bg-video {
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    z-index: -100;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(#ff43b730,#B80DF120);
+}
+
+.container {
+    background-color: rgba(255,255,255,0.35);
+    backdrop-filter: blur(8px);
+    border-radius: 14px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-around;
+    padding: 36px;
+    margin: 24px 326px;
+    font-size: 36px;
+}
+
+.content-main {
+    margin: 128px;
+    margin-top: 48px;
+    padding: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+}
+
+.selector {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 8px 8px #045b7d6d;
+}
