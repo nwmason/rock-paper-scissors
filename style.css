@@ -54,13 +54,35 @@ body {
     margin-top: 48px;
     padding: 64px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    flex: 1;
+    justify-content: center;
 }
 
 .selector {
     display: flex;
     flex-direction: column;
-    box-shadow: 8px 8px #045b7d6d;
+    margin-left: 48px;
+    margin-right: 48px;
+    box-shadow: 0 0 12px 4px #045b7d4d;
+    width: 112px;
+    height: 128px;
+    padding: 12px;
+    transition: 0.4s, box-shadow 0.1s;
+}
+
+.selector img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.selector:hover {
+    cursor: pointer;
+    box-shadow: 0 0 12px 12px #dddddd4d;
+    width: 122px;
+    height: 138px;
+}
+
+.selector:active {
+    box-shadow: 0 0 12px 8px #0eefffab;
+    transform: translateY(2px);
 }
