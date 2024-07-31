@@ -30,13 +30,13 @@ body {
 #fadeOut {
     opacity: 0; 
     z-index:-1; 
-    transition: opacity 1.8s, z-index 2.5s
+    transition: opacity 2.2s, z-index 2.5s;
 }
 
 #fadeIn {
     opacity: 1; 
     z-index: 1; 
-    transition: opacity 1.8s, z-index 2.5s 
+    transition: opacity 2.2s, z-index 2.5s;
 }
 
 .overlay {
@@ -149,7 +149,14 @@ body {
     display: flex;
     justify-content: space-evenly;
     align-items: end;
+
+    flex: 1;
+    position: static;
+    margin-bottom: 64px;
 }
+
+
+/* Dynamic classes begin here */
 
 .score {
     text-align: center;
@@ -166,3 +173,22 @@ body {
     font-weight: 600;
 }
 
+.computerSelection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    margin-top: -36px;
+    opacity: 0;
+}
+
+.computerImg {
+    width: 112px;
+    height: 128px;
+    margin-bottom: 16px;
+}
+
+.computerText {
+    font-size: 24px;
+    font-weight: 600;
+}

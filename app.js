@@ -34,37 +34,62 @@ function playRound(playerChoice, computerChoice) {
     const container = document.querySelector(".content");
     const selector = document.querySelectorAll(".selector");
 
-
     for (let i = 0; i < selector.length; i++) {
         selector[i].setAttribute("id", "fadeOut");
-    }
+        selector[i].addEventListener("transitionend", () => {
+            selector[i].remove();
+            if (i === 2) {
+                const computerContainer = document.createElement("div");
+                const computerText = document.createElement("div");
+                const computerImg = document.createElement("img");
+                computerContainer.setAttribute("class", "container computerSelection");
+                computerImg.src = "img/c-icon.png";
+                computerImg.alt = "An icon depicting a robot";
+                computerImg.setAttribute("class", "computerImg");
+                computerText.setAttribute("class", "computerText");
+                computerText.textContent = "the computer selects:";
+
+                container.appendChild(computerContainer);
+                computerContainer.appendChild(computerImg);
+                computerContainer.appendChild(computerText);
+
+                // I have literally zero idea how or why this works
+                // all i wanted was the computer choice to fade in
+                //instead it kept popping in, I've been messing with this
+                // for like 2 hours
+                //finally gave in and checked stack overflow, im not going down
+                //that rabbit hole it's a mess
+                //it works at least, even though I don't understand why!?!?
+                console.log(document.body.clientHeight);
+
+                computerContainer.setAttribute("id", "fadeIn");
+            }
+        });
+    };
 
 
-
-
-     //  refactor code time
+    //  refactor code time
     // if (playerChoice != 'rock' && playerChoice != 'paper' && playerChoice != 'scissors') {
-//         alert('You have chosen an incorrect option. \nYou lose this round!')
-//         return ++computerScore, playerScore
-//     } else if (playerChoice === computerChoice) {
-//         alert('This round was a tie! No points awarded for either player.');
-//         return
-//     } else if (playerChoice === 'rock' && computerChoice === 'scissors') {
-//         alert('You have won this round!');
-//         return ++playerScore, computerScore;
-//     } else if (playerChoice === 'paper' && computerChoice === 'rock') {
-//         alert('You have won this round!');
-//         return ++playerScore, computerScore;
-//     } else if (playerChoice === 'scissors' && computerChoice === 'paper'){
-//         alert('You have won this round!');
-//         return ++playerScore, computerScore;
-//     } else {
-//         alert('The computer has won this round!');
-//         return ++computerScore, playerScore;
-//     }
+    //         alert('You have chosen an incorrect option. \nYou lose this round!')
+    //         return ++computerScore, playerScore
+    //     } else if (playerChoice === computerChoice) {
+    //         alert('This round was a tie! No points awarded for either player.');
+    //         return
+    //     } else if (playerChoice === 'rock' && computerChoice === 'scissors') {
+    //         alert('You have won this round!');
+    //         return ++playerScore, computerScore;
+    //     } else if (playerChoice === 'paper' && computerChoice === 'rock') {
+    //         alert('You have won this round!');
+    //         return ++playerScore, computerScore;
+    //     } else if (playerChoice === 'scissors' && computerChoice === 'paper'){
+    //         alert('You have won this round!');
+    //         return ++playerScore, computerScore;
+    //     } else {
+    //         alert('The computer has won this round!');
+    //         return ++computerScore, playerScore;
+    //     }
 }
 
-//  flavor text to keep player informed, loops rounds until someone wins with win/loss text
 function playGame() {
     console.log("game started")
     const rockSelect = document.querySelector("#rock");
@@ -74,7 +99,6 @@ function playGame() {
     rockSelect.setAttribute("id", "fadeIn");
     paperSelect.setAttribute("id", "fadeIn");
     scissorSelect.setAttribute("id", "fadeIn");
-
 
     rockSelect.addEventListener("click", () => {
         playRound("rock")
@@ -92,13 +116,13 @@ function playGame() {
 //  --------------------   End Game Logic   --------------------  //
 
 
-//  ----------------   Pointless splashscreen   ----------------  //
+//  -------------   splashscreen for game start   -------------   //
 const startGame = document.querySelector(".play");
 const splashScreen = document.querySelector(".splash");
 
 startGame.addEventListener("click", () => {
     splashScreen.setAttribute("id", "fadeOut");
-    splashScreen.addEventListener("transition", () =>  {
+    splashScreen.addEventListener("transitionend", () => {
         splashScreen.remove();
 
     });
