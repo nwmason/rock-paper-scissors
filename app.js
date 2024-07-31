@@ -79,8 +79,8 @@ const splashScreen = document.querySelector(".splash");
 startGame.addEventListener("click", () => {
     splashScreen.classList.add("fadeOut");
     splashScreen.addEventListener("transition", () =>  {
-        splashScreen.parentNode.removeChild(splashScreen);
-    })
+        splashScreen.remove();
+    });
 })
 
 //  --------------------   End Game Logic   --------------------  //
