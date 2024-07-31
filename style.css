@@ -58,7 +58,7 @@ body {
     margin: 0;
     padding: 0;
     opacity: 1;
-    transition: opacity 1s;
+    transition: 2.45s;
 
     display: flex;
     flex-direction: column;
