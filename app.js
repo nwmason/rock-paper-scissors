@@ -26,6 +26,14 @@ function getComputerChoice() {
 //     }
 // }
 
+function incrementPlayerScore() {
+
+}
+
+function incrementComputerScore() {
+
+}
+
 //  game logic, determining who is a winner and who is a loser for the round
 function playRound(playerChoice, computerChoice) {
     computerChoice = getComputerChoice();
@@ -63,6 +71,59 @@ function playRound(playerChoice, computerChoice) {
                 console.log(document.body.clientHeight);
 
                 computerContainer.setAttribute("id", "fadeIn");
+                computerContainer.addEventListener("transitionend", () => {
+                    console.log("computer has faded in")
+                    const computerSelector = document.createElement("div");
+                    const computerSelectorImg = document.createElement("img");
+                    computerSelector.setAttribute("class", "container computerSelector");
+                    computerSelector.setAttribute("style", "margin-top: -64px;")
+
+
+                    if (computerChoice === "rock") {
+                        computerSelectorImg.src = "img/rock.png";
+                        console.log("confirming computer chose rock");
+
+                    } else if (computerChoice === "paper") {
+                        computerSelectorImg.src = "img/paper.png";
+                        console.log("confirming computer chose paper");
+
+                    } else {
+                        computerSelectorImg.src = "img/scissors.png";
+                        console.log("confirming computer chose scissors");
+                    };
+
+                    container.appendChild(computerSelector);
+                    computerSelector.appendChild(computerSelectorImg);
+
+                    // if it works it works I GUESS?????
+                    console.log(document.body.clientHeight);
+                    computerSelector.setAttribute("id", "fadeIn");
+
+                    const mainContainer = document.querySelector(".content");
+                    const resultText = document.createElement("pre");
+                    resultText.setAttribute("class", "resultText");
+                    computerSelector.addEventListener("transitionend", () => {
+                        if (playerChoice === computerChoice) {
+                            resultText.textContent = "the result is a tie\n\nno points awarded";
+
+                        } else if (playerChoice === "rock" && computerChoice === "scissors") {
+                            resultText.textContent = "rock beats scissors\n\nwell done!";
+
+                        } else if (playerChoice === "paper" && computerChoice === "rock") {
+                            resultText.textContent = "paper beats rock\n\nwell done!";
+
+                        } else if (playerChoice === "scissors" && computerChoice === "paper") {
+                            resultText.textContent = "scissors beats paper\n\nwell done!";
+
+                        } else {
+                            resultText.textContent = "the computer has won\n\nthere's always next time";
+
+                        }
+                        mainContainer.after(resultText);
+                        resultText.setAttribute("id", "fadeIn");
+                    })
+
+                });
             }
         });
     };

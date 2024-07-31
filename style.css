@@ -16,6 +16,7 @@ body {
 * {
     color: purple;
     user-select: none;
+    text-align: center;
 }
 
 #bg-video {
@@ -61,7 +62,6 @@ body {
     margin: 24px 326px;
     font-size: 36px;
     z-index: 300;
-    text-align: center;
     min-width: 240px;
 }
 
@@ -88,7 +88,6 @@ body {
     flex: 0;
 
     font-size: 42px;
-    text-align: center;
     padding: 16px 16px 16px 16px;
     transition: transform 0.15s, box-shadow 0.4s;
 }
@@ -145,6 +144,24 @@ body {
     transform: translateY(3px);
 }
 
+.computerSelector {
+    margin-left: 48px;
+    margin-right: 48px;
+    box-shadow: 0 0 12px 4px #045b7d4d;
+    min-width: 112px;
+    width: 112px;
+    height: 128px;
+    padding: 12px;
+    transition: 0.35s, box-shadow 0.05s, transform 0.1s;
+
+    opacity: 0;
+}
+
+.computerSelector img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
 .footer {
     display: flex;
     justify-content: space-evenly;
@@ -159,7 +176,6 @@ body {
 /* Dynamic classes begin here */
 
 .score {
-    text-align: center;
     font-size: 48px;
     color: white;
     margin-bottom: 12px;
@@ -178,8 +194,9 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 12px;
-    margin-top: -36px;
+    margin-top: -64px;
     opacity: 0;
+    position: static;
 }
 
 .computerImg {
@@ -191,4 +208,12 @@ body {
 .computerText {
     font-size: 24px;
     font-weight: 600;
+}
+
+.resultText {
+    color: #e5f775;
+    font-weight: 800;
+    font-size: 32px;
+    font-family: "Major Mono Display", monospace;
+    opacity: 0;
 }
