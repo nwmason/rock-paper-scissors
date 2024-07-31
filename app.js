@@ -29,8 +29,7 @@ function getPlayerChoice() {
 //  game logic, determining who is a winner and who is a loser for the round
 function playRound(playerChoice, computerChoice) {
 
-    playerChoice = getPlayerChoice();
-    computerChoice = getComputerChoice();
+    // computerChoice = getComputerChoice();
 
     alert('You have selected ' + playerChoice + '!')
     alert('The computer picks ' + computerChoice + '!')
@@ -72,4 +71,30 @@ function playGame() {
 }
 
 let computerScore = 0, playerScore = 0;
+
+//  ----------------   Pointless splashscreen   ----------------  //
+const startGame = document.querySelector(".play");
+const splashScreen = document.querySelector(".splash");
+
+startGame.addEventListener("click", () => {
+    splashScreen.classList.add("fadeOut");
+    splashScreen.addEventListener("transition", () =>  {
+        splashScreen.parentNode.removeChild(splashScreen);
+    })
+})
+
 //  --------------------   End Game Logic   --------------------  //
+const rockSelect = document.querySelector("#rock");
+const paperSelect = document.querySelector("#paper");
+const scissorSelect = document.querySelector("#scissors")
+
+// rockSelect.addEventListener("click", () => {
+// })
+
+// paperSelect.addEventListener("click", () => {
+
+// })
+
+// scissorSelect.addEventListener("click", () => {
+
+// })
