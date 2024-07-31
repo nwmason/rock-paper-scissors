@@ -61,6 +61,8 @@ body {
     margin: 24px 326px;
     font-size: 36px;
     z-index: 300;
+    text-align: center;
+    min-width: 240px;
 }
 
 .splash {
@@ -98,8 +100,10 @@ body {
 }
 
 .play:active {
-    opacity: 0;
-    z-index: inherit
+    box-shadow: 0 0 12px 12px #d60096ab;
+    transform: translateY(0px);
+    z-index: inherit;
+    transition: box-shadow 0.2s;
 }
 
 .content {
@@ -121,7 +125,7 @@ body {
     padding: 12px;
     transition: 0.35s, box-shadow 0.05s, transform 0.1s;
 
-    opacity: 1;
+    opacity: 0;
 }
 
 .selector img {
@@ -159,5 +163,6 @@ body {
     color: #e5f775;
     border-top: white 1px solid;
     border-radius: 4px;
+    font-weight: 600;
 }
 
