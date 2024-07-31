@@ -81,7 +81,8 @@ startGame.addEventListener("click", () => {
     splashScreen.addEventListener("transition", () =>  {
         splashScreen.remove();
     });
-})
+
+});
 
 //  --------------------   End Game Logic   --------------------  //
 const rockSelect = document.querySelector("#rock");

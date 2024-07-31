@@ -15,6 +15,7 @@ body {
 
 * {
     color: purple;
+    user-select: none;
 }
 
 #bg-video {
@@ -76,7 +77,6 @@ body {
     height: 64px;
     width: 528px;
     flex: 0;
-    user-select: none;
 
     font-size: 42px;
     text-align: center;
@@ -112,7 +112,9 @@ body {
     width: 112px;
     height: 128px;
     padding: 12px;
-    transition: 0.35s, box-shadow 0.05s;
+    transition: 0.35s, box-shadow 0.05s, transform 0.1s;
+
+    opacity: 1;
 }
 
 .selector img {
@@ -130,4 +132,24 @@ body {
 .selector:active {
     box-shadow: 0 0 12px 8px #0eefffab;
     transform: translateY(3px);
+}
+
+.footer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: end;
+}
+
+.score {
+    text-align: center;
+    font-size: 48px;
+    color: white;
+    margin-bottom: 12px;
+}
+
+.score-title {
+    font-size: 24px;
+    color: #e5f775;
+    border-top: white 1px solid;
+    border-radius: 4px;
 }
