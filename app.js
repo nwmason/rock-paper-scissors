@@ -160,8 +160,8 @@ function playRound(playerChoice, computerChoice, playerScore, computerScore) {
                     console.log(document.body.clientHeight);
                     computerSelector.setAttribute("id", "fadeIn");
 
-                    // dont forget to remove this
-                    computerChoice = "scissors"
+                    // debus purposes: dont forget to remove this
+                    // computerChoice = "scissors"
                     console.log(document.body.clientHeight);
 
                     computerSelector.addEventListener("transitionend", () => {
