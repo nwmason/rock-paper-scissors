@@ -11,7 +11,7 @@ function getComputerChoice() {
     }
 }
 
-function incrementPlayerScore(playerScore) {
+function incrementPlayerScore(playerScore, computerScore) {
     console.log("score incremented")
     const scoreNumber = document.querySelector("#playerScore");
     scoreNumber.textContent = ++playerScore;
@@ -27,11 +27,11 @@ function incrementPlayerScore(playerScore) {
         computerContainer.remove();
         computerSelector.remove();
         resultText.remove();
-        createChoiceScreen();
+        createChoiceScreen(playerScore, computerScore);
     }, { once: true });
 }
 
-function incrementComputerScore(computerScore) {
+function incrementComputerScore(playerScore, computerScore) {
     console.log("score incremented")
     const scoreNumber = document.querySelector("#computerScore");
     scoreNumber.textContent = ++computerScore;
@@ -47,7 +47,7 @@ function incrementComputerScore(computerScore) {
         computerContainer.remove();
         computerSelector.remove();
         resultText.remove();
-        createChoiceScreen();
+        createChoiceScreen(playerScore, computerScore);
     }, { once: true });
 }
 
@@ -55,19 +55,37 @@ function incrementComputerScore(computerScore) {
 // there's no way this is an efficient solution to anything i've done in this project
 // clearly in over my head in how i decided to go about this
 // the challenge will only further my hunger for power
-function createChoiceScreen() {
+function createChoiceScreen(playerScore, computerScore) {
     console.log("we've reached the choice screen")
-    // const selectorRock = document.createElement("div");
-    // const selectorPaper = document.createElement("div");
-    // const selectorScissors = document.createElement("div");
+    const selectorRock = document.createElement("div");
+    const rockImg = document.createElement("img");
+    const selectorPaper = document.createElement("div");
+    const paperImg = document.createElement("img");
+    const selectorScissors = document.createElement("div");
+    const scissorsImg = document.createElement("img");
+    const content = document.querySelector(".content");
 
+    selectorRock.setAttribute("class", "selector container");
+    selectorRock.setAttribute("id", "rock");
+    rockImg.src = "img/rock.png";
+    selectorPaper.setAttribute("class", "selector container");
+    selectorPaper.setAttribute("id", "paper");
+    paperImg.src = "img/paper.png";
+    selectorScissors.setAttribute("class", "selector container");
+    selectorScissors.setAttribute("id", "scissors");
+    scissorsImg.src = "img/scissors.png";
 
-    // selectorRock.setAttribute("class", ".selector .container");
-    // selectorRock.setAttribute("id", "#rock");
-    // selectorPaper.setAttribute("class", ".selector .container");
-    // selectorPaper.setAttribute("id", "#paper");
-    // selectorScissors.setAttribute("class", ".selector .container");
-    // selectorScissors.setAttribute("id", "#scissors");
+    selectorRock.appendChild(rockImg);
+    selectorPaper.appendChild(paperImg);
+    selectorScissors.appendChild(scissorsImg);
+
+    content.appendChild(selectorRock);
+    content.appendChild(selectorPaper);
+    content.appendChild(selectorScissors);
+
+    selectorRock.setAttribute("id", "fadeIn");
+    selectorPaper.setAttribute("id", "fadeIn");
+    selectorScissors.setAttribute("id", "fadeIn");
 }
 
 //  game logic, determining who is a winner and who is a loser for the round
@@ -163,28 +181,28 @@ function playRound(playerChoice, computerChoice, playerScore, computerScore) {
                             resultText.setAttribute("id", "fadeIn");
     
                             console.log(document.body.clientHeight);
-                            incrementPlayerScore(playerScore);
+                            incrementPlayerScore(playerScore, computerScore);
                         } else if (playerChoice === "paper" && computerChoice === "rock") {
                             resultText.textContent = "paper beats rock\n\nwell done!";
                             mainContainer.after(resultText);
                             resultText.setAttribute("id", "fadeIn");
     
                             console.log(document.body.clientHeight);
-                            incrementPlayerScore(playerScore);
+                            incrementPlayerScore(playerScore, computerScore);
                         } else if (playerChoice === "scissors" && computerChoice === "paper") {
                             resultText.textContent = "scissors beats paper\n\nwell done!";
                             mainContainer.after(resultText);
                             resultText.setAttribute("id", "fadeIn");
     
                             console.log(document.body.clientHeight);
-                            incrementPlayerScore(playerScore);
+                            incrementPlayerScore(playerScore, computerScore);
                         } else {
                             resultText.textContent = "the computer won the round\n\nwomp womp";
                             mainContainer.after(resultText);
                             resultText.setAttribute("id", "fadeIn");
     
                             console.log(document.body.clientHeight);
-                            incrementComputerScore(computerScore);
+                            incrementComputerScore(playerScore, computerScore);
                         }
                     }, { once: true })
 
