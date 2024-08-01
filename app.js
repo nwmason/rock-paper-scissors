@@ -12,7 +12,6 @@ function getComputerChoice() {
 }
 
 function incrementPlayerScore(playerScore, computerScore) {
-    console.log("score incremented")
     const scoreNumber = document.querySelector("#playerScore");
     scoreNumber.textContent = ++playerScore;
 
@@ -26,13 +25,11 @@ function incrementPlayerScore(playerScore, computerScore) {
     resultText.addEventListener("transitionend", () => {
         computerContainer.remove();
         computerSelector.remove();
-        resultText.remove();
         createChoiceScreen(playerScore, computerScore);
     }, { once: true });
 }
 
 function incrementComputerScore(playerScore, computerScore) {
-    console.log("score incremented")
     const scoreNumber = document.querySelector("#computerScore");
     scoreNumber.textContent = ++computerScore;
 
@@ -46,7 +43,6 @@ function incrementComputerScore(playerScore, computerScore) {
     resultText.addEventListener("transitionend", () => {
         computerContainer.remove();
         computerSelector.remove();
-        resultText.remove();
         createChoiceScreen(playerScore, computerScore);
     }, { once: true });
 }
@@ -56,7 +52,6 @@ function incrementComputerScore(playerScore, computerScore) {
 // clearly in over my head in how i decided to go about this
 // the challenge will only further my hunger for power
 function createChoiceScreen(playerScore, computerScore) {
-    console.log("we've reached the choice screen")
     const selectorRock = document.createElement("div");
     const rockImg = document.createElement("img");
     const selectorPaper = document.createElement("div");
@@ -83,10 +78,28 @@ function createChoiceScreen(playerScore, computerScore) {
     content.appendChild(selectorPaper);
     content.appendChild(selectorScissors);
 
-    selectorRock.setAttribute("id", "fadeIn");
-    selectorPaper.setAttribute("id", "fadeIn");
-    selectorScissors.setAttribute("id", "fadeIn");
+    playGame(playerScore, computerScore);
 }
+
+function displayResults(text) {
+    const resultText = document.querySelector(".resultText");
+    const computerContainer = document.querySelector(".computerSelection");
+    const computerSelector = document.querySelector(".computerSelector")
+    resultText.textContent = text;
+
+    console.log(document.body.clientHeight);
+    resultText.setAttribute("id", "fadeIn");
+    console.log(document.body.clientHeight);
+
+    resultText.addEventListener("transitionend", () => {
+        computerContainer.setAttribute("id", "fadeOut");
+        resultText.setAttribute("id", "fadeOut");
+        computerSelector.setAttribute("id", "fadeOut");
+    
+    }, { once: true });
+
+}
+
 
 //  game logic, determining who is a winner and who is a loser for the round
 function playRound(playerChoice, computerChoice, playerScore, computerScore) {
@@ -125,7 +138,6 @@ function playRound(playerChoice, computerChoice, playerScore, computerScore) {
 
                 computerContainer.setAttribute("id", "fadeIn");
                 computerContainer.addEventListener("transitionend", () => {
-                    console.log("computer has faded in")
                     const computerSelector = document.createElement("div");
                     const computerSelectorImg = document.createElement("img");
                     computerSelector.setAttribute("class", "container computerSelector");
@@ -133,15 +145,12 @@ function playRound(playerChoice, computerChoice, playerScore, computerScore) {
 
                     if (computerChoice === "rock") {
                         computerSelectorImg.src = "img/rock.png";
-                        console.log("confirming computer chose rock");
 
                     } else if (computerChoice === "paper") {
                         computerSelectorImg.src = "img/paper.png";
-                        console.log("confirming computer chose paper");
 
                     } else {
                         computerSelectorImg.src = "img/scissors.png";
-                        console.log("confirming computer chose scissors");
                     };
 
                     container.appendChild(computerSelector);
@@ -151,60 +160,46 @@ function playRound(playerChoice, computerChoice, playerScore, computerScore) {
                     console.log(document.body.clientHeight);
                     computerSelector.setAttribute("id", "fadeIn");
 
-                    const mainContainer = document.querySelector(".content");
-                    const resultText = document.createElement("pre");
-                    resultText.setAttribute("class", "resultText");
+                    // dont forget to remove this
                     computerChoice = "scissors"
                     console.log(document.body.clientHeight);
 
                     computerSelector.addEventListener("transitionend", () => {
                         if (playerChoice === computerChoice) {
                             
-                            resultText.textContent = "the result is a tie\n\nno points awarded";
-                            mainContainer.after(resultText);
-                            resultText.setAttribute("id", "fadeIn");
-                            console.log(document.body.clientHeight);
-                        
-                            computerContainer.setAttribute("id", "fadeOut");
-                            resultText.setAttribute("id", "fadeOut");
-                            computerSelector.setAttribute("id", "fadeOut");
+                            displayResults("the result is a tie\n\nno points awarded");
                         
                             computerSelector.addEventListener("transitionend", () => {
                                 computerContainer.remove();
                                 computerSelector.remove();
-                                resultText.remove();
-                                createChoiceScreen();
-                            });
+                                createChoiceScreen(playerScore, computerScore);
+                            }, { once: true });
                         } else if (playerChoice === "rock" && computerChoice === "scissors") {
-                            resultText.textContent = "rock beats scissors\n\nwell done!";
-                            mainContainer.after(resultText);
-                            resultText.setAttribute("id", "fadeIn");
-    
-                            console.log(document.body.clientHeight);
-                            incrementPlayerScore(playerScore, computerScore);
+                            displayResults("rock beats scissors\n\nwell done!");
+
+                            computerSelector.addEventListener("transitionend", () => {
+                                incrementPlayerScore(playerScore, computerScore);
+                            }, { once: true });
                         } else if (playerChoice === "paper" && computerChoice === "rock") {
-                            resultText.textContent = "paper beats rock\n\nwell done!";
-                            mainContainer.after(resultText);
-                            resultText.setAttribute("id", "fadeIn");
-    
-                            console.log(document.body.clientHeight);
-                            incrementPlayerScore(playerScore, computerScore);
+                            displayResults("paper beats rock\n\nwell done!");
+
+                            computerSelector.addEventListener("transitionend", () => {
+                                incrementPlayerScore(playerScore, computerScore);
+                            }, { once: true });
                         } else if (playerChoice === "scissors" && computerChoice === "paper") {
-                            resultText.textContent = "scissors beats paper\n\nwell done!";
-                            mainContainer.after(resultText);
-                            resultText.setAttribute("id", "fadeIn");
-    
-                            console.log(document.body.clientHeight);
-                            incrementPlayerScore(playerScore, computerScore);
+                            displayResults("scissors beats paper\n\nwell done!");
+
+                            computerSelector.addEventListener("transitionend", () => {
+                                incrementPlayerScore(playerScore, computerScore);
+                            }, { once: true });
                         } else {
-                            resultText.textContent = "the computer won the round\n\nwomp womp";
-                            mainContainer.after(resultText);
-                            resultText.setAttribute("id", "fadeIn");
+                            displayResults("the computer won the round\n\nwomp womp");
     
-                            console.log(document.body.clientHeight);
-                            incrementComputerScore(playerScore, computerScore);
+                            computerSelector.addEventListener("transitionend", () => {
+                                incrementComputerScore(playerScore, computerScore);
+                            }, { once: true });
                         }
-                    }, { once: true })
+                    }, { once: true });
 
                 }, { once: true });
             }
@@ -214,26 +209,26 @@ function playRound(playerChoice, computerChoice, playerScore, computerScore) {
 
 
 function playGame(playerScore, computerScore) {
-    console.log("game started")
     const rockSelect = document.querySelector("#rock");
     const paperSelect = document.querySelector("#paper");
     const scissorSelect = document.querySelector("#scissors")
 
+    console.log(document.body.clientHeight);
     rockSelect.setAttribute("id", "fadeIn");
     paperSelect.setAttribute("id", "fadeIn");
     scissorSelect.setAttribute("id", "fadeIn");
 
     rockSelect.addEventListener("click", () => {
         playRound("rock", getComputerChoice(), playerScore, computerScore)
-    }, { once: true })
+    }, { once: true });
 
     paperSelect.addEventListener("click", () => {
         playRound("paper", getComputerChoice(), playerScore, computerScore)
-    }, { once: true })
+    }, { once: true });
 
     scissorSelect.addEventListener("click", () => {
         playRound("scissors", getComputerChoice(), playerScore, computerScore)
-    }, { once: true })
+    }, { once: true });
 }
 
 //  --------------------   End Game Logic   --------------------  //
@@ -251,4 +246,4 @@ startGame.addEventListener("click", () => {
     }, { once: true });
 
     playGame(0, 0);
-});
+}, { once: true });

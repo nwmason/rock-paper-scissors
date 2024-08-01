@@ -170,6 +170,7 @@ body {
     flex: 1;
     position: static;
     margin-bottom: 64px;
+    margin-top: -64px;
 }
 
 
@@ -216,4 +217,5 @@ body {
     font-size: 32px;
     font-family: "Major Mono Display", monospace;
     opacity: 0;
+    margin-top: -48px;
 }
