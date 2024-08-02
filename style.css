@@ -63,7 +63,7 @@ body {
     padding: 36px;
     margin: 24px 326px;
     font-size: 36px;
-    z-index: 300;
+    z-index: 1000;
     min-width: 240px;
 }
 

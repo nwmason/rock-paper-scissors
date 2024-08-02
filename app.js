@@ -283,7 +283,7 @@ const startGame = document.querySelector(".play");
 const splashScreen = document.querySelector(".splash");
 
 startGame.addEventListener("click", () => {
-    splashScreen.setAttribute("id", "fadeOut");
+    splashScreen.setAttribute("id", "splash-fade");
     splashScreen.addEventListener("transitionend", () => {
         splashScreen.remove();
 
