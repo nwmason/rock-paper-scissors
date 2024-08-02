@@ -11,97 +11,9 @@ function getComputerChoice() {
     }
 }
 
-function incrementPlayerScore(playerScore, computerScore) {
-    const scoreNumber = document.querySelector("#playerScore");
-    scoreNumber.textContent = ++playerScore;
-
-    const computerContainer = document.querySelector(".computerSelection");
-    const computerSelector = document.querySelector(".computerSelector");
-    const resultText = document.querySelector(".resultText");
-
-    computerContainer.setAttribute("id", "fadeOut");
-    resultText.setAttribute("id", "fadeOut");
-    computerSelector.setAttribute("id", "fadeOut");
-    resultText.addEventListener("transitionend", () => {
-        computerContainer.remove();
-        computerSelector.remove();
-        createChoiceScreen(playerScore, computerScore);
-    }, { once: true });
-}
-
-function incrementComputerScore(playerScore, computerScore) {
-    const scoreNumber = document.querySelector("#computerScore");
-    scoreNumber.textContent = ++computerScore;
-
-    const computerContainer = document.querySelector(".computerSelection");
-    const computerSelector = document.querySelector(".computerSelector");
-    const resultText = document.querySelector(".resultText");
-
-    computerContainer.setAttribute("id", "fadeOut");
-    resultText.setAttribute("id", "fadeOut");
-    computerSelector.setAttribute("id", "fadeOut");
-    resultText.addEventListener("transitionend", () => {
-        computerContainer.remove();
-        computerSelector.remove();
-        createChoiceScreen(playerScore, computerScore);
-    }, { once: true });
-}
-
-
-// there's no way this is an efficient solution to anything i've done in this project
-// clearly in over my head in how i decided to go about this
-// the challenge will only further my hunger for power
-function createChoiceScreen(playerScore, computerScore) {
-    const selectorRock = document.createElement("div");
-    const rockImg = document.createElement("img");
-    const selectorPaper = document.createElement("div");
-    const paperImg = document.createElement("img");
-    const selectorScissors = document.createElement("div");
-    const scissorsImg = document.createElement("img");
-    const content = document.querySelector(".content");
-
-    selectorRock.setAttribute("class", "selector container");
-    selectorRock.setAttribute("id", "rock");
-    rockImg.src = "img/rock.png";
-    selectorPaper.setAttribute("class", "selector container");
-    selectorPaper.setAttribute("id", "paper");
-    paperImg.src = "img/paper.png";
-    selectorScissors.setAttribute("class", "selector container");
-    selectorScissors.setAttribute("id", "scissors");
-    scissorsImg.src = "img/scissors.png";
-
-    selectorRock.appendChild(rockImg);
-    selectorPaper.appendChild(paperImg);
-    selectorScissors.appendChild(scissorsImg);
-
-    content.appendChild(selectorRock);
-    content.appendChild(selectorPaper);
-    content.appendChild(selectorScissors);
-
-    playGame(playerScore, computerScore);
-}
-
-function displayResults(text) {
-    const resultText = document.querySelector(".resultText");
-    const computerContainer = document.querySelector(".computerSelection");
-    const computerSelector = document.querySelector(".computerSelector")
-    resultText.textContent = text;
-
-    console.log(document.body.clientHeight);
-    resultText.setAttribute("id", "fadeIn");
-    console.log(document.body.clientHeight);
-
-    resultText.addEventListener("transitionend", () => {
-        computerContainer.setAttribute("id", "fadeOut");
-        resultText.setAttribute("id", "fadeOut");
-        computerSelector.setAttribute("id", "fadeOut");
-    
-    }, { once: true });
-
-}
-
-
-//  game logic, determining who is a winner and who is a loser for the round
+// this block feels like a mess, but i don't know how else to solve the issue
+// of divs loading before the previous divs are deleting creating an awkward spacing
+// just know that while this works, it looks awful and probably is awful
 function playRound(playerChoice, computerChoice, playerScore, computerScore) {
     console.log("round started, player chose " + playerChoice + "\ncomputer chose " + computerChoice);
 
@@ -129,11 +41,11 @@ function playRound(playerChoice, computerChoice, playerScore, computerScore) {
 
                 // I have literally zero idea how or why this works
                 // all i wanted was the computer choice to fade in
-                //instead it kept popping in, I've been messing with this
+                // instead it kept popping in, I've been messing with this
                 // for like 2 hours
-                //finally gave in and checked stack overflow, im not going down
-                //that rabbit hole it's a mess
-                //it works at least, even though I don't understand why!?!?
+                // finally gave in and checked stack overflow, im not going down
+                // that rabbit hole it's a mess of people arguing
+                // it works at least, even though I don't understand why!?!?
                 console.log(document.body.clientHeight);
 
                 computerContainer.setAttribute("id", "fadeIn");
@@ -161,7 +73,7 @@ function playRound(playerChoice, computerChoice, playerScore, computerScore) {
                     computerSelector.setAttribute("id", "fadeIn");
 
                     // debus purposes: dont forget to remove this
-                    // computerChoice = "scissors"
+                    computerChoice = "scissors"
                     console.log(document.body.clientHeight);
 
                     computerSelector.addEventListener("transitionend", () => {
@@ -207,7 +119,7 @@ function playRound(playerChoice, computerChoice, playerScore, computerScore) {
     };
 }
 
-
+// ---------------------------------------------------------------------- //
 function playGame(playerScore, computerScore) {
     const rockSelect = document.querySelector("#rock");
     const paperSelect = document.querySelector("#paper");
@@ -231,6 +143,108 @@ function playGame(playerScore, computerScore) {
     }, { once: true });
 }
 
+function displayResults(text) {
+    const resultText = document.querySelector(".resultText");
+    const computerContainer = document.querySelector(".computerSelection");
+    const computerSelector = document.querySelector(".computerSelector")
+    resultText.textContent = text;
+
+    console.log(document.body.clientHeight);
+    resultText.setAttribute("id", "fadeIn");
+    console.log(document.body.clientHeight);
+
+    resultText.addEventListener("transitionend", () => {
+        computerContainer.setAttribute("id", "fadeOut");
+        resultText.setAttribute("id", "fadeOut");
+        computerSelector.setAttribute("id", "fadeOut");
+    
+    }, { once: true });
+}
+
+function incrementPlayerScore(playerScore, computerScore) {
+    const scoreNumber = document.querySelector("#playerScore");
+    scoreNumber.textContent = ++playerScore;
+
+    const computerContainer = document.querySelector(".computerSelection");
+    const computerSelector = document.querySelector(".computerSelector");
+    const resultText = document.querySelector(".resultText");
+
+    computerContainer.setAttribute("id", "fadeOut");
+    resultText.setAttribute("id", "fadeOut");
+    computerSelector.setAttribute("id", "fadeOut");
+    resultText.addEventListener("transitionend", () => {
+        computerContainer.remove();
+        computerSelector.remove();
+        if (playerScore < 5) {
+            createChoiceScreen(playerScore, computerScore);
+        } else {
+            gameOver(playerScore, computerScore);
+        }
+    }, { once: true });
+}
+
+function incrementComputerScore(playerScore, computerScore) {
+    const scoreNumber = document.querySelector("#computerScore");
+    scoreNumber.textContent = ++computerScore;
+
+    const computerContainer = document.querySelector(".computerSelection");
+    const computerSelector = document.querySelector(".computerSelector");
+    const resultText = document.querySelector(".resultText");
+
+    computerContainer.setAttribute("id", "fadeOut");
+    resultText.setAttribute("id", "fadeOut");
+    computerSelector.setAttribute("id", "fadeOut");
+    resultText.addEventListener("transitionend", () => {
+        computerContainer.remove();
+        computerSelector.remove();
+        if (computerScore < 5) {
+            createChoiceScreen(playerScore, computerScore);
+        } else {
+            gameOver(playerScore, computerScore);
+        }
+    }, { once: true });
+}
+
+function createChoiceScreen(playerScore, computerScore) {
+    const selectorRock = document.createElement("div");
+    const rockImg = document.createElement("img");
+    const selectorPaper = document.createElement("div");
+    const paperImg = document.createElement("img");
+    const selectorScissors = document.createElement("div");
+    const scissorsImg = document.createElement("img");
+    const content = document.querySelector(".content");
+
+    selectorRock.setAttribute("class", "selector container");
+    selectorRock.setAttribute("id", "rock");
+    rockImg.src = "img/rock.png";
+    selectorPaper.setAttribute("class", "selector container");
+    selectorPaper.setAttribute("id", "paper");
+    paperImg.src = "img/paper.png";
+    selectorScissors.setAttribute("class", "selector container");
+    selectorScissors.setAttribute("id", "scissors");
+    scissorsImg.src = "img/scissors.png";
+
+    selectorRock.appendChild(rockImg);
+    selectorPaper.appendChild(paperImg);
+    selectorScissors.appendChild(scissorsImg);
+
+    content.appendChild(selectorRock);
+    content.appendChild(selectorPaper);
+    content.appendChild(selectorScissors);
+
+    playGame(playerScore, computerScore);
+}
+
+function gameOver(playerScore, computerScore) { 
+    const body = document.querySelector("body");
+    const endScreen = document.createElement("div");
+    endScreen.setAttribute("class", "splash");
+    endScreen.setAttribute("style", "opacity: 0;")
+
+    body.appendChild(endScreen)
+
+}
+
 //  --------------------   End Game Logic   --------------------  //
 
 
@@ -245,5 +259,5 @@ startGame.addEventListener("click", () => {
 
     }, { once: true });
 
-    playGame(0, 0);
+    playGame(4, 0);
 }, { once: true });
