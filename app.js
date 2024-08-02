@@ -71,11 +71,8 @@ function playRound(playerChoice, computerChoice, playerScore, computerScore) {
                     // if it works it works I GUESS?????
                     console.log(document.body.clientHeight);
                     computerSelector.setAttribute("id", "fadeIn");
-
-                    // debus purposes: dont forget to remove this
-                    computerChoice = "scissors"
+                    
                     console.log(document.body.clientHeight);
-
                     computerSelector.addEventListener("transitionend", () => {
                         if (playerChoice === computerChoice) {
                             
@@ -87,19 +84,19 @@ function playRound(playerChoice, computerChoice, playerScore, computerScore) {
                                 createChoiceScreen(playerScore, computerScore);
                             }, { once: true });
                         } else if (playerChoice === "rock" && computerChoice === "scissors") {
-                            displayResults("rock beats scissors\n\nwell done!");
+                            displayResults("rock beats scissors\n\nwell done");
 
                             computerSelector.addEventListener("transitionend", () => {
                                 incrementPlayerScore(playerScore, computerScore);
                             }, { once: true });
                         } else if (playerChoice === "paper" && computerChoice === "rock") {
-                            displayResults("paper beats rock\n\nwell done!");
+                            displayResults("paper beats rock\n\nwell done");
 
                             computerSelector.addEventListener("transitionend", () => {
                                 incrementPlayerScore(playerScore, computerScore);
                             }, { once: true });
                         } else if (playerChoice === "scissors" && computerChoice === "paper") {
-                            displayResults("scissors beats paper\n\nwell done!");
+                            displayResults("scissors beats paper\n\nwell done");
 
                             computerSelector.addEventListener("transitionend", () => {
                                 incrementPlayerScore(playerScore, computerScore);
@@ -237,14 +234,47 @@ function createChoiceScreen(playerScore, computerScore) {
 
 function gameOver(playerScore, computerScore) { 
     const body = document.querySelector("body");
+
     const endScreen = document.createElement("div");
-    endScreen.setAttribute("class", "splash");
-    endScreen.setAttribute("style", "opacity: 0;")
+    const endText = document.createElement("div");
+    const playAgain = document.createElement("div");
 
-    body.appendChild(endScreen)
+    endScreen.setAttribute("class", "splash endScreen");
+    endText.setAttribute("style", "font-size: 48px; margin-top: 256px;")
+    playAgain.setAttribute("class", "play container");
+    playAgain.textContent = "play again?";
 
+    body.appendChild(endScreen);
+    endScreen.appendChild(endText);
+    endScreen.appendChild(playAgain);
+
+    if (playerScore === 5) {
+        endText.textContent = "a winner is you!";
+    } else if (computerScore === 5) {
+        endText.textContent = "loser :(";
+    }
+
+    // i just need to research this at some point
+    // like seriously it's annoying
+    console.log(document.body.clientHeight);
+    endScreen.setAttribute("id", "fadeIn");
+
+    playerScore = 0
+    computerScore = 0
+
+    endScreen.addEventListener("click", () => {
+        const playerScoreText = document.querySelector("#playerScore");
+        const computerScoreText = document.querySelector("#playerScore");    
+        playerScoreText.textContent = playerScore;
+        computerScoreText.textContent = computerScore;
+    
+        endScreen.setAttribute("id", "fadeOut");
+        endScreen.addEventListener("transitionend", () => {
+            endScreen.remove();
+            createChoiceScreen(0, 0);
+        })
+    })
 }
-
 //  --------------------   End Game Logic   --------------------  //
 
 
@@ -259,5 +289,5 @@ startGame.addEventListener("click", () => {
 
     }, { once: true });
 
-    playGame(4, 0);
+    playGame(0, 0);
 }, { once: true });
