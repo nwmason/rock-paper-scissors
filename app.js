@@ -240,7 +240,7 @@ function gameOver(playerScore, computerScore) {
     const playAgain = document.createElement("div");
 
     endScreen.setAttribute("class", "splash endScreen");
-    endText.setAttribute("style", "font-size: 48px; margin-top: 256px;")
+    endText.setAttribute("style", "font-size: 48px; margin-top: 156px; margin-bottom: -96px")
     playAgain.setAttribute("class", "play container");
     playAgain.textContent = "play again?";
 
@@ -283,11 +283,7 @@ const startGame = document.querySelector(".play");
 const splashScreen = document.querySelector(".splash");
 
 startGame.addEventListener("click", () => {
-    splashScreen.setAttribute("id", "splash-fade");
-    splashScreen.addEventListener("transitionend", () => {
-        splashScreen.remove();
+    splashScreen.setAttribute("id", "fadeOut");
+    splashScreen.addEventListener("transitionend", playGame(0, 0))
 
-    }, { once: true });
-
-    playGame(0, 0);
 }, { once: true });
